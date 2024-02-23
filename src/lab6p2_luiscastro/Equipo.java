@@ -9,10 +9,10 @@ package lab6p2_luiscastro;
  * @author lfern
  */
 public class Equipo {
-    String nombre;
-    String pais;
-    String ciudad;
-    String estadio;
+    private String nombre;
+    private String pais;
+    private String ciudad;
+    private String estadio;
 
     public Equipo(String nombre, String pais, String ciudad, String estadio) {
         this.nombre = nombre;

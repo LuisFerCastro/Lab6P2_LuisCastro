@@ -9,9 +9,9 @@ package lab6p2_luiscastro;
  * @author lfern
  */
 public class Jugador {
-    String nombreJugador;
-    int edad;
-    String posicion;
+    private String nombreJugador;
+    private int edad;
+    private String posicion;
 
     public Jugador(String nombreJugador, int edad, String posicion) {
         this.nombreJugador = nombreJugador;
