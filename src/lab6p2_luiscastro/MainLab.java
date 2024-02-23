@@ -4,6 +4,7 @@
  */
 package lab6p2_luiscastro;
 
+import javax.swing.DefaultListModel;
 import javax.swing.SpinnerNumberModel;
 
 /**
@@ -346,6 +347,11 @@ public class MainLab extends javax.swing.JFrame {
         bt_equipos.setFocusable(false);
         bt_equipos.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         bt_equipos.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        bt_equipos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bt_equiposMouseClicked(evt);
+            }
+        });
         jToolBar1.add(bt_equipos);
 
         bt_jugadores.setBackground(new java.awt.Color(0, 0, 204));
@@ -353,6 +359,11 @@ public class MainLab extends javax.swing.JFrame {
         bt_jugadores.setFocusable(false);
         bt_jugadores.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         bt_jugadores.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        bt_jugadores.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bt_jugadoresMouseClicked(evt);
+            }
+        });
         jToolBar1.add(bt_jugadores);
 
         bt_transferencias.setBackground(new java.awt.Color(153, 255, 102));
@@ -361,6 +372,11 @@ public class MainLab extends javax.swing.JFrame {
         bt_transferencias.setFocusable(false);
         bt_transferencias.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         bt_transferencias.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        bt_transferencias.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bt_transferenciasMouseClicked(evt);
+            }
+        });
         jToolBar1.add(bt_transferencias);
 
         lb_titulo.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
@@ -403,14 +419,29 @@ public class MainLab extends javax.swing.JFrame {
 
         jmi_equipos.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jmi_equipos.setText("Crear Equipos");
+        jmi_equipos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_equiposActionPerformed(evt);
+            }
+        });
         menu_opciones.add(jmi_equipos);
 
         jmi_jugadores.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_J, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jmi_jugadores.setText("Crear Jugadores");
+        jmi_jugadores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_jugadoresActionPerformed(evt);
+            }
+        });
         menu_opciones.add(jmi_jugadores);
 
         jmi_transferencias.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jmi_transferencias.setText("Transferencias");
+        jmi_transferencias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_transferenciasActionPerformed(evt);
+            }
+        });
         menu_opciones.add(jmi_transferencias);
 
         jMenuBar2.add(menu_opciones);
@@ -423,6 +454,58 @@ public class MainLab extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jmi_equiposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_equiposActionPerformed
+        // TODO add your handling code here:
+        abreCEquipo();
+    }//GEN-LAST:event_jmi_equiposActionPerformed
+
+    private void jmi_jugadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_jugadoresActionPerformed
+        // TODO add your handling code here:
+        abreCJugador();
+    }//GEN-LAST:event_jmi_jugadoresActionPerformed
+
+    private void jmi_transferenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_transferenciasActionPerformed
+        // TODO add your handling code here:
+        abreTrans();
+    }//GEN-LAST:event_jmi_transferenciasActionPerformed
+
+    private void bt_equiposMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_equiposMouseClicked
+        // TODO add your handling code here:
+        abreCJugador();
+    }//GEN-LAST:event_bt_equiposMouseClicked
+
+    private void bt_jugadoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_jugadoresMouseClicked
+        // TODO add your handling code here:
+        abreCJugador();
+    }//GEN-LAST:event_bt_jugadoresMouseClicked
+
+    private void bt_transferenciasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_transferenciasMouseClicked
+        // TODO add your handling code here:
+        abreTrans();
+    }//GEN-LAST:event_bt_transferenciasMouseClicked
+    
+    
+    public void abreCEquipo(){
+        jd_equipos.pack();
+        jd_equipos.setLocationRelativeTo(this);
+        jd_equipos.setAlwaysOnTop(true);
+        jd_equipos.setModal(true);
+        jd_equipos.setVisible(true);
+    }
+    public void abreCJugador(){
+        jd_jugadores.pack();
+        jd_jugadores.setLocationRelativeTo(this);
+        jd_jugadores.setAlwaysOnTop(true);
+        jd_jugadores.setModal(true);
+        jd_jugadores.setVisible(true);
+    }
+    public void abreTrans(){
+        jd_transferencias.pack();
+        jd_transferencias.setLocationRelativeTo(this);
+        jd_transferencias.setAlwaysOnTop(true);
+        jd_transferencias.setModal(true);
+        jd_transferencias.setVisible(true);
+    }
     /**
      * @param args the command line arguments
      */
