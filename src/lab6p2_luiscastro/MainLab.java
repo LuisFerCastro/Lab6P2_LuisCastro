@@ -356,9 +356,9 @@ public class MainLab extends javax.swing.JFrame {
         );
 
         jmi_modificar.setText("Modificar");
-        jmi_modificar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jmi_modificarMouseClicked(evt);
+        jmi_modificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_modificarActionPerformed(evt);
             }
         });
         pp_jugadores.add(jmi_modificar);
@@ -571,7 +571,7 @@ public class MainLab extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jl_jugadoresMouseClicked
 
-    private void jmi_modificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmi_modificarMouseClicked
+    private void jmi_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_modificarActionPerformed
         // TODO add your handling code here:
         if(jl_jugadores.getSelectedIndex()>=0){
         DefaultListModel model = (DefaultListModel)jl_jugadores.getModel();
@@ -611,7 +611,7 @@ public class MainLab extends javax.swing.JFrame {
           ((Jugador)model.get(jl_jugadores.getSelectedIndex())).setNombreJugador(nombre);
           ((Jugador)model.get(jl_jugadores.getSelectedIndex())).setEdad(edad_final);
         }
-    }//GEN-LAST:event_jmi_modificarMouseClicked
+    }//GEN-LAST:event_jmi_modificarActionPerformed
     
     
     public void abreCEquipo(){
