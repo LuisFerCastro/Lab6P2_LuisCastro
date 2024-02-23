@@ -66,6 +66,9 @@ public class MainLab extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jl_jugadores = new javax.swing.JList<>();
         bt_transferencia = new javax.swing.JButton();
+        pp_jugadores = new javax.swing.JPopupMenu();
+        jmi_modificar = new javax.swing.JMenuItem();
+        jmi_eliminar = new javax.swing.JMenuItem();
         pn_principal = new javax.swing.JPanel();
         jToolBar1 = new javax.swing.JToolBar();
         bt_equipos = new javax.swing.JButton();
@@ -127,16 +130,15 @@ public class MainLab extends javax.swing.JFrame {
                             .addComponent(lb_pais, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lb_estadio, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(pn_crearequiposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(tf_pais, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
-                            .addComponent(tf_ciudad)
+                        .addGroup(pn_crearequiposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tf_pais, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
                             .addComponent(tf_nombre)
-                            .addComponent(tf_estadio))))
-                .addContainerGap(23, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_crearequiposLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(bt_agregarEq, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(101, 101, 101))
+                            .addComponent(tf_ciudad)
+                            .addComponent(tf_estadio)))
+                    .addGroup(pn_crearequiposLayout.createSequentialGroup()
+                        .addGap(113, 113, 113)
+                        .addComponent(bt_agregarEq, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(24, 24, 24))
         );
         pn_crearequiposLayout.setVerticalGroup(
             pn_crearequiposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -159,16 +161,18 @@ public class MainLab extends javax.swing.JFrame {
                 .addGroup(pn_crearequiposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lb_estadio)
                     .addComponent(tf_estadio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23)
+                .addGap(18, 18, 18)
                 .addComponent(bt_agregarEq, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jd_equiposLayout = new javax.swing.GroupLayout(jd_equipos.getContentPane());
         jd_equipos.getContentPane().setLayout(jd_equiposLayout);
         jd_equiposLayout.setHorizontalGroup(
             jd_equiposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pn_crearequipos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jd_equiposLayout.createSequentialGroup()
+                .addComponent(pn_crearequipos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jd_equiposLayout.setVerticalGroup(
             jd_equiposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -210,32 +214,30 @@ public class MainLab extends javax.swing.JFrame {
         pn_jugadoresLayout.setHorizontalGroup(
             pn_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_jugadoresLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(pn_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lb_edad, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lb_nombreJug, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lb_posicion, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pn_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pn_jugadoresLayout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addGroup(pn_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lb_edad, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lb_nombreJug, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lb_posicion, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pn_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(tf_nombreJug)
-                            .addComponent(sp_edad)
-                            .addComponent(cb_posicion, 0, 257, Short.MAX_VALUE)))
-                    .addGroup(pn_jugadoresLayout.createSequentialGroup()
-                        .addGap(69, 69, 69)
-                        .addComponent(lb_titulocrearJug, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pn_jugadoresLayout.createSequentialGroup()
-                        .addGap(121, 121, 121)
-                        .addComponent(btn_crearJug, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(22, Short.MAX_VALUE))
+                    .addComponent(btn_crearJug, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pn_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(cb_posicion, 0, 301, Short.MAX_VALUE)
+                        .addComponent(sp_edad)
+                        .addComponent(tf_nombreJug)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_jugadoresLayout.createSequentialGroup()
+                .addContainerGap(121, Short.MAX_VALUE)
+                .addComponent(lb_titulocrearJug, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(107, 107, 107))
         );
         pn_jugadoresLayout.setVerticalGroup(
             pn_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_jugadoresLayout.createSequentialGroup()
-                .addGap(27, 27, 27)
+                .addGap(28, 28, 28)
                 .addComponent(lb_titulocrearJug)
-                .addGap(29, 29, 29)
+                .addGap(28, 28, 28)
                 .addGroup(pn_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lb_nombreJug)
                     .addComponent(tf_nombreJug, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -247,16 +249,18 @@ public class MainLab extends javax.swing.JFrame {
                 .addGroup(pn_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lb_posicion)
                     .addComponent(cb_posicion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                 .addComponent(btn_crearJug, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addGap(41, 41, 41))
         );
 
         javax.swing.GroupLayout jd_jugadoresLayout = new javax.swing.GroupLayout(jd_jugadores.getContentPane());
         jd_jugadores.getContentPane().setLayout(jd_jugadoresLayout);
         jd_jugadoresLayout.setHorizontalGroup(
             jd_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pn_jugadores, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jd_jugadoresLayout.createSequentialGroup()
+                .addComponent(pn_jugadores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jd_jugadoresLayout.setVerticalGroup(
             jd_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -286,6 +290,11 @@ public class MainLab extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jt_equipos);
 
         jl_jugadores.setModel(new DefaultListModel());
+        jl_jugadores.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jl_jugadoresMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jl_jugadores);
 
         bt_transferencia.setText("Transferencia -->");
@@ -345,6 +354,17 @@ public class MainLab extends javax.swing.JFrame {
             jd_transferenciasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(pn_transferencias, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
+
+        jmi_modificar.setText("Modificar");
+        jmi_modificar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jmi_modificarMouseClicked(evt);
+            }
+        });
+        pp_jugadores.add(jmi_modificar);
+
+        jmi_eliminar.setText("Eliminar");
+        pp_jugadores.add(jmi_eliminar);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -541,6 +561,57 @@ public class MainLab extends javax.swing.JFrame {
         tf_estadio.setText("");
         
     }//GEN-LAST:event_bt_agregarEqMouseClicked
+
+    private void jl_jugadoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jl_jugadoresMouseClicked
+        // TODO add your handling code here:
+        if(jl_jugadores.getSelectedIndex()>=0){
+            if(evt.getButton()==3){
+                pp_jugadores.show(evt.getComponent(), evt.getX(), evt.getY());
+            }
+        }
+    }//GEN-LAST:event_jl_jugadoresMouseClicked
+
+    private void jmi_modificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmi_modificarMouseClicked
+        // TODO add your handling code here:
+        if(jl_jugadores.getSelectedIndex()>=0){
+        DefaultListModel model = (DefaultListModel)jl_jugadores.getModel();
+        String nombre = JOptionPane.showInputDialog("Ingrese el nuevo nombre:");
+        boolean estado;
+        if(nombre.matches("[0-9]*")){
+            estado = true;
+            }else{
+                estado = false;
+            }
+        while(estado == false){
+                    nombre = JOptionPane.showInputDialog("No se permiten numeros. Ingrese el nombre: ");
+                if(nombre.matches("[0-9]*")){
+                    estado = true;
+                }else{
+                    estado = false;
+                }
+            }
+        
+        String edad = JOptionPane.showInputDialog("Ingrese la edad: ");
+        
+        boolean estado2;
+            if(edad.matches("[0-9]*")){
+                estado2 = true;
+            }else{
+                estado2 = false;
+            }
+            while(estado2 == false){
+                    edad = JOptionPane.showInputDialog("No se permiten letras. Ingrese la edad: ");
+                if(edad.matches("[0-9]*")){
+                    estado2 = true;
+                }else{
+                    estado2 = false;
+                }
+            }
+           int edad_final = Integer.parseInt(edad);
+          ((Jugador)model.get(jl_jugadores.getSelectedIndex())).setNombreJugador(nombre);
+          ((Jugador)model.get(jl_jugadores.getSelectedIndex())).setEdad(edad_final);
+        }
+    }//GEN-LAST:event_jmi_modificarMouseClicked
     
     
     public void abreCEquipo(){
@@ -615,8 +686,10 @@ public class MainLab extends javax.swing.JFrame {
     private javax.swing.JDialog jd_jugadores;
     private javax.swing.JDialog jd_transferencias;
     private javax.swing.JList<String> jl_jugadores;
+    private javax.swing.JMenuItem jmi_eliminar;
     private javax.swing.JMenuItem jmi_equipos;
     private javax.swing.JMenuItem jmi_jugadores;
+    private javax.swing.JMenuItem jmi_modificar;
     private javax.swing.JMenuItem jmi_transferencias;
     private javax.swing.JTree jt_equipos;
     private javax.swing.JLabel lb_ciudad;
@@ -639,6 +712,7 @@ public class MainLab extends javax.swing.JFrame {
     private javax.swing.JPanel pn_jugadores;
     private javax.swing.JPanel pn_principal;
     private javax.swing.JPanel pn_transferencias;
+    private javax.swing.JPopupMenu pp_jugadores;
     private javax.swing.JSpinner sp_edad;
     private javax.swing.JTextField tf_ciudad;
     private javax.swing.JTextField tf_estadio;
