@@ -5,7 +5,10 @@
 package lab6p2_luiscastro;
 
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 
 /**
  *
@@ -101,6 +104,11 @@ public class MainLab extends javax.swing.JFrame {
         lb_estadio.setText("Estadio");
 
         bt_agregarEq.setText("Agregar");
+        bt_agregarEq.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bt_agregarEqMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout pn_crearequiposLayout = new javax.swing.GroupLayout(pn_crearequipos);
         pn_crearequipos.setLayout(pn_crearequiposLayout);
@@ -191,6 +199,11 @@ public class MainLab extends javax.swing.JFrame {
         cb_posicion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Portero", "Defensa", "Mediocampista", "Delantero" }));
 
         btn_crearJug.setText("Agregar");
+        btn_crearJug.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_crearJugMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout pn_jugadoresLayout = new javax.swing.GroupLayout(pn_jugadores);
         pn_jugadores.setLayout(pn_jugadoresLayout);
@@ -268,7 +281,7 @@ public class MainLab extends javax.swing.JFrame {
         lb_equipos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lb_equipos.setText("Equipos");
 
-        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Equipos");
         jt_equipos.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         jScrollPane1.setViewportView(jt_equipos);
 
@@ -338,7 +351,7 @@ public class MainLab extends javax.swing.JFrame {
 
         pn_principal.setBackground(new java.awt.Color(204, 204, 255));
 
-        jToolBar1.setBackground(new java.awt.Color(204, 204, 255));
+        jToolBar1.setBackground(new java.awt.Color(153, 153, 255));
         jToolBar1.setRollover(true);
 
         bt_equipos.setBackground(new java.awt.Color(255, 51, 51));
@@ -471,7 +484,7 @@ public class MainLab extends javax.swing.JFrame {
 
     private void bt_equiposMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_equiposMouseClicked
         // TODO add your handling code here:
-        abreCJugador();
+        abreCEquipo();
     }//GEN-LAST:event_bt_equiposMouseClicked
 
     private void bt_jugadoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_jugadoresMouseClicked
@@ -483,6 +496,51 @@ public class MainLab extends javax.swing.JFrame {
         // TODO add your handling code here:
         abreTrans();
     }//GEN-LAST:event_bt_transferenciasMouseClicked
+
+    private void btn_crearJugMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_crearJugMouseClicked
+        // TODO add your handling code here:
+        DefaultListModel m = (DefaultListModel) jl_jugadores.getModel();
+        m.addElement(new Jugador(tf_nombreJug.getText(), (Integer)sp_edad.getValue(),(String) cb_posicion.getSelectedItem()));
+        jl_jugadores.setModel(m);
+        JOptionPane.showMessageDialog(jd_jugadores, "Se ha agregado exitosamente.");
+        tf_nombreJug.setText("");
+        sp_edad.setValue(15);
+        cb_posicion.setSelectedItem("Portero");
+    }//GEN-LAST:event_btn_crearJugMouseClicked
+
+    private void bt_agregarEqMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_agregarEqMouseClicked
+        // TODO add your handling code here:
+        DefaultTreeModel m = (DefaultTreeModel)jt_equipos.getModel();
+        DefaultMutableTreeNode raiz = (DefaultMutableTreeNode)m.getRoot();
+        
+        String pais = tf_pais.getText();
+        
+        int centinela = -1;
+        for (int i = 0; i < raiz.getChildCount(); i++) {
+            if(raiz.getChildAt(i).toString().equals(pais)){
+                DefaultMutableTreeNode nodo_equipo1;
+                nodo_equipo1 = new DefaultMutableTreeNode(new Equipo(tf_nombre.getText(), tf_pais.getText(), tf_ciudad.getText(), tf_estadio.getText()));
+                ((DefaultMutableTreeNode)raiz.getChildAt(i)).add(nodo_equipo1);
+                centinela = 1;
+            }    
+        }
+        if(centinela == -1){
+            DefaultMutableTreeNode nodo_pais;
+            nodo_pais = new DefaultMutableTreeNode(tf_pais.getText());
+            DefaultMutableTreeNode nodo_equipo;
+            nodo_equipo = new DefaultMutableTreeNode(new Equipo(tf_nombre.getText(), tf_pais.getText(), tf_ciudad.getText(), tf_estadio.getText()));
+            nodo_pais.add(nodo_equipo);
+            raiz.add(nodo_pais);
+        }
+        m.reload();
+        
+        JOptionPane.showMessageDialog(jd_equipos, "Se ha agregado exitosamente.");
+        tf_nombre.setText("");
+        tf_pais.setText("");
+        tf_ciudad.setText("");
+        tf_estadio.setText("");
+        
+    }//GEN-LAST:event_bt_agregarEqMouseClicked
     
     
     public void abreCEquipo(){
@@ -588,4 +646,5 @@ public class MainLab extends javax.swing.JFrame {
     private javax.swing.JTextField tf_nombreJug;
     private javax.swing.JTextField tf_pais;
     // End of variables declaration//GEN-END:variables
+    DefaultMutableTreeNode nodo_seleccionado;
 }
