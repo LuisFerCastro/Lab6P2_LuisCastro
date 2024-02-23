@@ -618,21 +618,18 @@ public class MainLab extends javax.swing.JFrame {
         jd_equipos.pack();
         jd_equipos.setLocationRelativeTo(this);
         jd_equipos.setAlwaysOnTop(true);
-        jd_equipos.setModal(true);
         jd_equipos.setVisible(true);
     }
     public void abreCJugador(){
         jd_jugadores.pack();
         jd_jugadores.setLocationRelativeTo(this);
         jd_jugadores.setAlwaysOnTop(true);
-        jd_jugadores.setModal(true);
         jd_jugadores.setVisible(true);
     }
     public void abreTrans(){
         jd_transferencias.pack();
         jd_transferencias.setLocationRelativeTo(this);
         jd_transferencias.setAlwaysOnTop(true);
-        jd_transferencias.setModal(true);
         jd_transferencias.setVisible(true);
     }
     /**
