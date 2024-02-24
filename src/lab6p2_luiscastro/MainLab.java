@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.MutableTreeNode;
 
 /**
  *
@@ -69,6 +70,8 @@ public class MainLab extends javax.swing.JFrame {
         pp_jugadores = new javax.swing.JPopupMenu();
         jmi_modificar = new javax.swing.JMenuItem();
         jmi_eliminar = new javax.swing.JMenuItem();
+        pp_equipo = new javax.swing.JPopupMenu();
+        jmi_elimEquip = new javax.swing.JMenuItem();
         pn_principal = new javax.swing.JPanel();
         jToolBar1 = new javax.swing.JToolBar();
         bt_equipos = new javax.swing.JButton();
@@ -287,6 +290,11 @@ public class MainLab extends javax.swing.JFrame {
 
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Equipos");
         jt_equipos.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jt_equipos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jt_equiposMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jt_equipos);
 
         jl_jugadores.setModel(new DefaultListModel());
@@ -364,7 +372,20 @@ public class MainLab extends javax.swing.JFrame {
         pp_jugadores.add(jmi_modificar);
 
         jmi_eliminar.setText("Eliminar");
+        jmi_eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_eliminarActionPerformed(evt);
+            }
+        });
         pp_jugadores.add(jmi_eliminar);
+
+        jmi_elimEquip.setText("Eliminar");
+        jmi_elimEquip.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_elimEquipActionPerformed(evt);
+            }
+        });
+        pp_equipo.add(jmi_elimEquip);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -573,21 +594,24 @@ public class MainLab extends javax.swing.JFrame {
 
     private void jmi_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_modificarActionPerformed
         // TODO add your handling code here:
+        jd_transferencias.setVisible(false);
         if(jl_jugadores.getSelectedIndex()>=0){
         DefaultListModel model = (DefaultListModel)jl_jugadores.getModel();
         String nombre = JOptionPane.showInputDialog("Ingrese el nuevo nombre:");
         boolean estado;
-        if(nombre.matches("[0-9]*")){
-            estado = true;
+        if(nombre.contains("0")||nombre.contains("1")||nombre.contains("2")||nombre.contains("3")||nombre.contains("4")||nombre.contains("5")
+                ||nombre.contains("6")||nombre.contains("7")||nombre.contains("8")||nombre.contains("9")){
+            estado = false;
             }else{
-                estado = false;
+                estado = true;
             }
         while(estado == false){
                     nombre = JOptionPane.showInputDialog("No se permiten numeros. Ingrese el nombre: ");
-                if(nombre.matches("[0-9]*")){
-                    estado = true;
-                }else{
+                if(nombre.contains("0")||nombre.contains("1")||nombre.contains("2")||nombre.contains("3")||nombre.contains("4")||nombre.contains("5")
+                ||nombre.contains("6")||nombre.contains("7")||nombre.contains("8")||nombre.contains("9")){
                     estado = false;
+                }else{
+                    estado = true;
                 }
             }
         
@@ -612,24 +636,71 @@ public class MainLab extends javax.swing.JFrame {
           ((Jugador)model.get(jl_jugadores.getSelectedIndex())).setEdad(edad_final);
         }
     }//GEN-LAST:event_jmi_modificarActionPerformed
+
+    private void jmi_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_eliminarActionPerformed
+        // TODO add your handling code here:
+        DefaultListModel modelo = (DefaultListModel)jl_jugadores.getModel();
+        DefaultTreeModel mtree = (DefaultTreeModel)jt_equipos.getModel();
+        DefaultMutableTreeNode raiz = (DefaultMutableTreeNode)mtree.getRoot();
+        String nombre = ((Jugador)modelo.get(jl_jugadores.getSelectedIndex())).getNombreJugador();
+        modelo.remove(jl_jugadores.getSelectedIndex());
+        for (int i = 0; i < raiz.getChildCount(); i++) {
+            if(raiz.getChildAt(i).toString().equals(nombre)){
+                raiz.remove((MutableTreeNode) raiz.getChildAt(i));
+            }
+        }
+    }//GEN-LAST:event_jmi_eliminarActionPerformed
+
+    private void jt_equiposMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jt_equiposMouseClicked
+        // TODO add your handling code here:
+        if(evt.getButton()==3){
+            
+            int row = jt_equipos.getClosestRowForLocation(evt.getX(), evt.getY());
+            jt_equipos.setSelectionRow(row);
+            Object equipo_sel = jt_equipos.getSelectionPath().getLastPathComponent();
+            nodo_seleccionado = (DefaultMutableTreeNode) equipo_sel;
+            
+            if(nodo_seleccionado.getUserObject()instanceof Equipo){
+                pp_equipo.show(evt.getComponent(), evt.getX(), evt.getY());
+            }
+            
+        }
+    }//GEN-LAST:event_jt_equiposMouseClicked
+
+    private void jmi_elimEquipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_elimEquipActionPerformed
+        // TODO add your handling code here:
+       DefaultTreeModel m = (DefaultTreeModel)jt_equipos.getModel();
+       DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) m.getRoot();
+       for (int i = 0; i < raiz.getChildCount(); i++) {
+            if(raiz.getChildAt(i) instanceof Equipo){
+                ((DefaultMutableTreeNode)raiz.getChildAt(i)).removeAllChildren();
+                raiz.remove((DefaultMutableTreeNode)raiz.getChildAt(i));
+            }
+        }
+            
+        m.reload();
+    }//GEN-LAST:event_jmi_elimEquipActionPerformed
     
     
     public void abreCEquipo(){
         jd_equipos.pack();
         jd_equipos.setLocationRelativeTo(this);
         jd_equipos.setAlwaysOnTop(true);
+        jd_equipos.setModal(true);
         jd_equipos.setVisible(true);
     }
     public void abreCJugador(){
         jd_jugadores.pack();
         jd_jugadores.setLocationRelativeTo(this);
         jd_jugadores.setAlwaysOnTop(true);
+        jd_jugadores.setModal(true);
         jd_jugadores.setVisible(true);
     }
     public void abreTrans(){
         jd_transferencias.pack();
         jd_transferencias.setLocationRelativeTo(this);
         jd_transferencias.setAlwaysOnTop(true);
+        jd_transferencias.setModal(true);
         jd_transferencias.setVisible(true);
     }
     /**
@@ -683,6 +754,7 @@ public class MainLab extends javax.swing.JFrame {
     private javax.swing.JDialog jd_jugadores;
     private javax.swing.JDialog jd_transferencias;
     private javax.swing.JList<String> jl_jugadores;
+    private javax.swing.JMenuItem jmi_elimEquip;
     private javax.swing.JMenuItem jmi_eliminar;
     private javax.swing.JMenuItem jmi_equipos;
     private javax.swing.JMenuItem jmi_jugadores;
@@ -709,6 +781,7 @@ public class MainLab extends javax.swing.JFrame {
     private javax.swing.JPanel pn_jugadores;
     private javax.swing.JPanel pn_principal;
     private javax.swing.JPanel pn_transferencias;
+    private javax.swing.JPopupMenu pp_equipo;
     private javax.swing.JPopupMenu pp_jugadores;
     private javax.swing.JSpinner sp_edad;
     private javax.swing.JTextField tf_ciudad;
@@ -718,4 +791,5 @@ public class MainLab extends javax.swing.JFrame {
     private javax.swing.JTextField tf_pais;
     // End of variables declaration//GEN-END:variables
     DefaultMutableTreeNode nodo_seleccionado;
+    Equipo equipo_seleccionado;
 }
