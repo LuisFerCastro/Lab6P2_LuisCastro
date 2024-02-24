@@ -647,13 +647,16 @@ public class MainLab extends javax.swing.JFrame {
         DefaultListModel modelo = (DefaultListModel)jl_jugadores.getModel();
         DefaultTreeModel mtree = (DefaultTreeModel)jt_equipos.getModel();
         DefaultMutableTreeNode raiz = (DefaultMutableTreeNode)mtree.getRoot();
-        String nombre = ((Jugador)modelo.get(jl_jugadores.getSelectedIndex())).getNombreJugador();
+        Jugador jugador_eliminar = ((Jugador)modelo.get(jl_jugadores.getSelectedIndex()));
         modelo.remove(jl_jugadores.getSelectedIndex());
-        for (int i = 0; i < raiz.getChildCount(); i++) {
-            if(raiz.getChildAt(i).toString().equals(nombre)){
-                raiz.remove((MutableTreeNode) raiz.getChildAt(i));
+        for (int i = 0; i < nodo_seleccionado.getChildCount(); i++) {
+            DefaultMutableTreeNode posicion = (DefaultMutableTreeNode) nodo_seleccionado.getChildAt(i);
+            if(posicion.getUserObject().equals(jugador_eliminar)){
+                nodo_seleccionado.remove((MutableTreeNode) nodo_seleccionado.getChildAt(i));
             }
         }
+        jt_equipos.removeAll();
+        jt_equipos.setModel(mtree);
     }//GEN-LAST:event_jmi_eliminarActionPerformed
 
     private void jt_equiposMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jt_equiposMouseClicked
@@ -693,9 +696,7 @@ public class MainLab extends javax.swing.JFrame {
             DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) m.getRoot();
             DefaultListModel modelo = (DefaultListModel) jl_jugadores.getModel();
             int centinela1 = -1;
-            /*int row = jt_equipos.getClosestRowForLocation(evt.getX(), evt.getY());
-            jt_equipos.setSelectionRow(row);*/
-            //jugador_seleccionado = (Jugador)modelo.getElementAt(jl_jugadores.getSelectedIndex());
+            
             Object equipo_sel = jt_equipos.getSelectionPath().getLastPathComponent();
             nodo_seleccionado = (DefaultMutableTreeNode) equipo_sel;
             if(nodo_seleccionado.getUserObject() instanceof Equipo){
@@ -718,7 +719,9 @@ public class MainLab extends javax.swing.JFrame {
                         nodo_posicion.add(nodo_jugador);
                         nodo_seleccionado.add(nodo_posicion);
                     }
-                m.reload();
+                jt_equipos.removeAll();
+                jt_equipos.setModel(m);
+                
                 
             }
             
