@@ -306,6 +306,11 @@ public class MainLab extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jl_jugadores);
 
         bt_transferencia.setText("Transferencia -->");
+        bt_transferencia.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bt_transferenciaMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout pn_transferenciasLayout = new javax.swing.GroupLayout(pn_transferencias);
         pn_transferencias.setLayout(pn_transferenciasLayout);
@@ -680,6 +685,47 @@ public class MainLab extends javax.swing.JFrame {
             
         m.reload();
     }//GEN-LAST:event_jmi_elimEquipActionPerformed
+
+    private void bt_transferenciaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_transferenciaMouseClicked
+        // TODO add your handling code here:
+        if(jl_jugadores.getSelectedIndex()>=0 && jt_equipos.getSelectionPath() != null ){
+            DefaultTreeModel m = (DefaultTreeModel)jt_equipos.getModel();
+            DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) m.getRoot();
+            DefaultListModel modelo = (DefaultListModel) jl_jugadores.getModel();
+            int centinela1 = -1;
+            /*int row = jt_equipos.getClosestRowForLocation(evt.getX(), evt.getY());
+            jt_equipos.setSelectionRow(row);*/
+            //jugador_seleccionado = (Jugador)modelo.getElementAt(jl_jugadores.getSelectedIndex());
+            Object equipo_sel = jt_equipos.getSelectionPath().getLastPathComponent();
+            nodo_seleccionado = (DefaultMutableTreeNode) equipo_sel;
+            if(nodo_seleccionado.getUserObject() instanceof Equipo){
+                
+                
+                for (int i = 0; i < nodo_seleccionado.getChildCount(); i++) {
+                    DefaultMutableTreeNode posicion = (DefaultMutableTreeNode)nodo_seleccionado.getChildAt(i);
+                    if(posicion.getUserObject().equals(((Jugador)modelo.get(jl_jugadores.getSelectedIndex())).getPosicion())){
+                        DefaultMutableTreeNode nodo_jugador;
+                        nodo_jugador = new DefaultMutableTreeNode((Jugador)modelo.get(jl_jugadores.getSelectedIndex()));
+                        posicion.add(nodo_jugador);
+                        centinela1 = 1;
+                    } 
+                }
+                if(centinela1 == -1){
+                       DefaultMutableTreeNode nodo_posicion;
+                        nodo_posicion = new DefaultMutableTreeNode(((Jugador)modelo.get(jl_jugadores.getSelectedIndex())).getPosicion());
+                        DefaultMutableTreeNode nodo_jugador;
+                        nodo_jugador = new DefaultMutableTreeNode((Jugador)modelo.get(jl_jugadores.getSelectedIndex()));
+                        nodo_posicion.add(nodo_jugador);
+                        nodo_seleccionado.add(nodo_posicion);
+                    }
+                m.reload();
+                
+            }
+            
+        }else{
+            JOptionPane.showMessageDialog(jd_transferencias, "No se ha seleccionado un jugador.");
+        }
+    }//GEN-LAST:event_bt_transferenciaMouseClicked
     
     
     public void abreCEquipo(){
@@ -791,5 +837,5 @@ public class MainLab extends javax.swing.JFrame {
     private javax.swing.JTextField tf_pais;
     // End of variables declaration//GEN-END:variables
     DefaultMutableTreeNode nodo_seleccionado;
-    Equipo equipo_seleccionado;
+    Jugador jugador_seleccionado;
 }
